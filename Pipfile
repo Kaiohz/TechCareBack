@@ -1,0 +1,22 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = false
+name = "pypi"
+
+[packages]
+fastapi = "*"
+pydantic = "*"
+pydantic-settings = "*"
+python-json-logger = "*"
+uvicorn = "*"
+sqlmodel  = "*"
+
+[dev-packages]
+ipython = "*"
+coverage = "*"
+pytest = "*"
+
+[requires]
+
+[pipenv]
+allow_prereleases = true

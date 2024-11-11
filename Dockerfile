@@ -1,20 +1,24 @@
-# Use the official Node.js 14 image as the base image
-FROM node:22
+FROM artifactory.laforge.cloud.bpifrance.fr/docker-io/python:3.12.6-slim-bookworm
 
-# Set the working directory inside the container
-WORKDIR /app
+ENV HOME=/python-docker
 
-# Copy package.json and package-lock.json to the working directory
-COPY package*.json ./
+ENV PYTHONPATH='/python-docker'
+
+WORKDIR /python-docker
+
+# Install Pipenv
+RUN pip install pipenv
+
+# Copy the Pipfile and Pipfile.lock from your host to the container
+COPY Pipfile Pipfile.lock ./
 
 # Install project dependencies
-RUN npm install
+RUN pipenv install --deploy --ignore-pipfile --python $(which python)
 
-# Copy the rest of the project files to the working directory
-COPY . .
+# Copy the content of the local src directory to the working directory in the container
+COPY . ./
 
-# Expose the port your Node.js app is listening on (replace 3000 with your actual port)
-EXPOSE 3000
+# Change permissions
+RUN chmod -R 777 /python-docker
 
-# Start the Node.js app
-CMD [ "npm", "run", "start" ]
+ENTRYPOINT ["pipenv", "run", "python", "-m","techcareback.main"]
