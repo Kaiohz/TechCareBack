@@ -34,7 +34,7 @@ class ProductModel(SQLModel, table=True):
     family_product_id: int = Field(foreign_key="familyproductmodel.id")
 
 
-class SippliersProductsModel(SQLModel, table=True):
+class SuppliersProductsModel(SQLModel, table=True):
     supplier_id: int = Field(foreign_key="suppliermodel.id", primary_key=True)
     product_id: int = Field(foreign_key="productmodel.id", primary_key=True)
 

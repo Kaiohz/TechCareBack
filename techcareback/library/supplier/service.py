@@ -34,3 +34,6 @@ class SupplierService:
         supplierModel.adress = supplier.adress
         supplierModel.contact = supplier.contact
         return supplierModel
+
+    async def get_suppliers(self) -> list[object]:
+        return await postgres_service.get_in_database(SupplierModel)

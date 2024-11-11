@@ -1,7 +1,6 @@
 from pydantic import BaseModel
 
 class Product(BaseModel):
-    id: int
     name: str
     customs_code: str
     is_kit: bool
@@ -9,11 +8,12 @@ class Product(BaseModel):
     serial_number: str
     img: str
     description: str
-    public_price: str
-    buying_price: str
+    public_price: int
+    buying_price: int
     vat: str
-    price_date: int
-    units: str
+    date_price: int
+    units: int
     comments: str
     specifications: str
     family_product_id: int
+    suppliers: list[int]
